@@ -40,6 +40,16 @@ public class UserController {
     @PutMapping("/user/{userId}")
     public UserUpdateCheckDto updateUser(@PathVariable Long userId, @RequestBody UserUpdateDto updateDto){
         userService.updateUser(userId, updateDto);
-        return new UserUpdateCheckDto(true);
+        return new UserUpdateCheckDto(true); // UserUpdateCheckDto를 통해 success: true 반환
+    }
+
+    @GetMapping("/user/find/{userName}")
+    public UserListDto findUserByName(@PathVariable String userName){
+        return userService.getUserByName(userName);
+    }
+
+    @GetMapping("/user/findbynickname/{userNickname}")
+    public UserNicknameListDto findUserByNickname(@PathVariable String userNickname){
+        return userService.getUserByNickname(userNickname);
     }
 }

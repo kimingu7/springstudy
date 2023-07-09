@@ -1,9 +1,6 @@
 package com.example.test.service;
 
-import com.example.test.dto.GetUserListDto;
-import com.example.test.dto.SignInDto;
-import com.example.test.dto.SignInResponseDto;
-import com.example.test.dto.UserUpdateDto;
+import com.example.test.dto.*;
 import com.example.test.model.User;
 import com.example.test.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,10 +28,21 @@ public class UserService {
        return response; // 그래서 response를 return하게 되면 this.name, this.nickname, this.type으로 이뤄진 객체를 return 하게 되는 것
     }
 
+    public UserListDto getUserByName(String name){
+        List<User> userList = userRepository.findAllByName(name);
+        List<UserInformationDto> list = new ArrayList<>();
+        for (User user : userList){
+            UserInformationDto dto = new UserInformationDto(user);
+            list.add(dto);
+        };
+        UserListDto response = new UserListDto(list);
+        return response;
+    }
+
     //2번
     public GetUserListDto getAllUsers(){
-        List<User> userList = userRepository.findAll(); // userList는 User를 원소로 가지는 list
-        List<SignInResponseDto> list = new ArrayList<>(); // list는 빈 리스트?
+        List<User> userList = userRepository.findAll(); // userList는 User 타입을 가지는 list
+        List<SignInResponseDto> list = new ArrayList<>(); // list는 SignInResponseDto 타입을 가지는 ArrayList
 
         for (User user : userList){ // userList 안의 user들을 순회하면서
             SignInResponseDto dto = new SignInResponseDto(user); // dto는 SignInResponseDto의 user에 해당하는 name, nickname, type으로 이뤄진 객체
@@ -57,5 +65,16 @@ public class UserService {
         user.setName(updateDto.getName()); // UserUpdateDto의 updateDto에서 getName을 통해 얻은
         user.setNickname(updateDto.getNickname());
         user.setType(updateDto.getType());
+    }
+
+    public UserNicknameListDto getUserByNickname(String nickname){
+        List<User> userList = userRepository.findAllByNickname(nickname);
+        List<UserNicknameDto> list = new ArrayList<>();
+        for (User user : userList){
+            UserNicknameDto dto = new UserNicknameDto(user);
+            list.add(dto);
+        }
+        UserNicknameListDto response = new UserNicknameListDto(list);
+        return response;
     }
 }
