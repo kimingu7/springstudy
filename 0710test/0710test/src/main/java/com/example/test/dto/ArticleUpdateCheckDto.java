@@ -1,14 +1,16 @@
 package com.example.test.dto;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public class ArticleListCheckDto {
+@NoArgsConstructor
+public class ArticleUpdateCheckDto {
     private int code;
-    private ArticleListDto data;
+    private Object data;
     private String message;
 
-    public ArticleListCheckDto(int code, ArticleListDto data, String message) {
+    public ArticleUpdateCheckDto(int code, Object data, String message){
         this.code = code;
         this.data = data;
         this.message = message;

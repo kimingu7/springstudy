@@ -8,17 +8,16 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class ArticleInformationDto {
+public class ArticleFindByIdDto {
     private String title;
     private String content;
-    private List<CreateCommentDto> list;
+    private List<CreateCommentDto> comments;
+    private int code;
+    private String message;
 
-    public Article toArticle(){
-        return new Article(this.title, this.content);
-    }
-    public ArticleInformationDto(Article article, List<CreateCommentDto> list){
+    public ArticleFindByIdDto(Article article, List<CreateCommentDto> comments){
         this.title = article.getTitle();
         this.content = article.getContent();
-        this.list = list;
-    };
+        this.comments = comments;
+    }
 }

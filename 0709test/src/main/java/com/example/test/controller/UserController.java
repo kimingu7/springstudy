@@ -53,7 +53,7 @@ public class UserController {
     @GetMapping("/article")
     public ArticleListCheckDto getAllArticles(){
         int code = 200;
-        Object data = articleService.getAllArticles();
+        ArticleListDto data = articleService.getAllArticles();
         String message = "정상적으로 모든 게시글을 가져왔습니다.";
 
         return new ArticleListCheckDto(code, data, message);
@@ -62,7 +62,7 @@ public class UserController {
     @GetMapping("/article/read/{articleId}")
     public ArticleByIdDto getArticleById(@PathVariable Long articleId){
         int code = 200;
-        Object data = articleService.getArticleById(articleId);
+        ArticleInformationDto data = articleService.getArticleById(articleId);
         String message = "정상적으로 해당 게시글을 가져왔습니다.";
         return new ArticleByIdDto(code, data, message);
     }
