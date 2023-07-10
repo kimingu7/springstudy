@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class ArticleController {
 
-    private final ArticleService articleService;
+    private final ArticleService articleService; // ArticleService를 가져옴
 
-    @PostMapping("/article/create")
-    public ArticleCreateCheckDto createArticle(@RequestBody ArticleCreateDto articleCreateDto){
+    @PostMapping("/article/create") // PostMapping을 통해 /article/create URI를 매핑함
+    public ArticleCreateCheckDto createArticle(@RequestBody ArticleCreateDto articleCreateDto){ // Post 방식은 RequestBody를 요구하는데, ArticleCreateDto의 articleCreateDto를 매개변수로 가짐
         articleService.createArticle(articleCreateDto);
         int code = 200;
         Object data = null;
@@ -22,7 +22,7 @@ public class ArticleController {
     }
 
     @DeleteMapping("/article/delete/{articleId}")
-    public ArticleDeleteDto deleteArticle(@PathVariable Long articleId){
+    public ArticleDeleteDto deleteArticle(@PathVariable Long articleId){ // Long 타입의 articleId를 PathVariable로 가짐
         articleService.deleteArticle(articleId);
         int code = 200;
         Object data = null;
